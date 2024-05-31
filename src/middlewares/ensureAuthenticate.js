@@ -5,8 +5,6 @@ import { AppError } from '../utils/app-error.js'
 export function ensureAuthenticate(req, res, next) {
   const authHeader = req.headers
 
-  console.log(authHeader)
-
   if (!authHeader.cookie) {
     throw new AppError('JWT token não informado', 401)
   }

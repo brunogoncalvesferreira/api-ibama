@@ -5,8 +5,6 @@ export class UserValidatedController {
   async index(req, res) {
     const { user } = req
 
-    console.log(user)
-
     const checkUserExist = await sql`select * from users where id = ${user.id}`
 
     console.log(checkUserExist)
