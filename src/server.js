@@ -9,10 +9,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(
   cors({
-    origin: [
-      'http://localhost:5173',
-      'https://api-ibama-kxuh4cg6oa-uw.a.run.app',
-    ],
+    origin: ['http://localhost:5173', 'https://upload-ibama.vercel.app/'],
     credentials: true,
   }),
 )
