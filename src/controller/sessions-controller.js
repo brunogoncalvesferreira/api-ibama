@@ -12,7 +12,7 @@ export class SessionsController {
 
     const user = users[0]
 
-    if (!user) {
+    if (!users) {
       throw new AppError('E-mail ou senha inválidos', 401)
     }
 
@@ -29,6 +29,15 @@ export class SessionsController {
       expiresIn,
     })
 
-    return res.status(200).json({ user, token })
+    res.cookie('token', token, {
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      maxAge: 15 * 60 * 1000,
+    })
+
+    delete user.password
+
+    return res.status(200).json({ user })
   }
 }

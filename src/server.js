@@ -2,10 +2,20 @@ import express from 'express'
 import cors from 'cors'
 import { routes } from './routes/routes.js'
 import { AppError } from './utils/app-error.js'
+import cookieParser from 'cookie-parser'
 
 const app = express()
-app.use(cors())
 app.use(express.json())
+app.use(cookieParser())
+app.use(
+  cors({
+    origin: [
+      'http://localhost:5173',
+      'https://api-ibama-kxuh4cg6oa-uw.a.run.app',
+    ],
+    credentials: true,
+  }),
+)
 
 app.use(routes)
 

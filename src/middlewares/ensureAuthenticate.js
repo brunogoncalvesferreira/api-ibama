@@ -3,19 +3,21 @@ import { auth as authConfig } from '../config/auth.js'
 import { AppError } from '../utils/app-error.js'
 
 export function ensureAuthenticate(req, res, next) {
-  const authHeader = req.headers.authorization
+  const authHeader = req.headers
 
-  if (!authHeader) {
+  console.log(authHeader)
+
+  if (!authHeader.cookie) {
     throw new AppError('JWT token não informado', 401)
   }
 
-  const [_, token] = authHeader.split(' ')
+  const [_, token] = authHeader.cookie.split('token=')
 
   try {
     const { sub: userId } = jwt.verify(token, authConfig.jwt.secret)
 
     req.user = {
-      id: Number(userId),
+      id: userId,
     }
 
     return next()
