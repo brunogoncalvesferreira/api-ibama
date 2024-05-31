@@ -9,7 +9,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(
   cors({
-    origin: 'https://upload-ibama.vercel.app/',
+    origin: 'https://upload-ibama.vercel.app',
     credentials: true,
   }),
 )
